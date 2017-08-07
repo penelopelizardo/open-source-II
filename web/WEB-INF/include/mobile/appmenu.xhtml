@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <h:form id="menuForm">
+        <p:menu>
+            <p:submenu label="#{myBundle.Maintenance}">
+                <p:menuitem value="#{myBundle.ActivosFijosHeading}..." outcome="/mobile/activosFijos/index" />
+                <p:menuitem value="#{myBundle.CalculoDepreciacionHeading}..." outcome="/mobile/calculoDepreciacion/index" />
+                <p:menuitem value="#{myBundle.DepartamentosHeading}..." outcome="/mobile/departamentos/index" />
+                <p:menuitem value="#{myBundle.EmpleadosHeading}..." outcome="/mobile/empleados/index" />
+                <p:menuitem value="#{myBundle.LoginHeading}..." outcome="/mobile/login/index" />
+                <p:menuitem value="#{myBundle.ParametrosHeading}..." outcome="/mobile/parametros/index" />
+                <p:menuitem value="#{myBundle.ProveedoresHeading}..." outcome="/mobile/proveedores/index" />
+                <p:menuitem value="#{myBundle.TiposActivosHeading}..." outcome="/mobile/tiposActivos/index" />
+                <p:menuitem value="#{myBundle.TiposPagosHeading}..." outcome="/mobile/tiposPagos/index" />
+                <p:menuitem value="#{myBundle.UbicacionesHeading}..." outcome="/mobile/ubicaciones/index" />
+            </p:submenu>
+            <p:menuitem value="#{myBundle.FullApp}" outcome="/index" icon="ui-icon-home"/>
+        </p:menu>
+    </h:form>
+</ui:composition>

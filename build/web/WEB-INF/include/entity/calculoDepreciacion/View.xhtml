@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CalculoDepreciacionViewDlg" widgetVar="CalculoDepreciacionViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewCalculoDepreciacionTitle}" closeOnEscape="true">
+
+            <h:form id="CalculoDepreciacionViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{calculoDepreciacionController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_idcalculodepreciacion}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.idcalculodepreciacion}" title="#{myBundle.ViewCalculoDepreciacionTitle_idcalculodepreciacion}"/>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_anoproceso}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.anoproceso}" title="#{myBundle.ViewCalculoDepreciacionTitle_anoproceso}"/>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_mesproceso}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.mesproceso}" title="#{myBundle.ViewCalculoDepreciacionTitle_mesproceso}"/>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_fechaproceso}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.fechaproceso}" title="#{myBundle.ViewCalculoDepreciacionTitle_fechaproceso}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_montodepreciado}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.montodepreciado}" title="#{myBundle.ViewCalculoDepreciacionTitle_montodepreciado}"/>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_depreciacionacumulada}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.depreciacionacumulada}" title="#{myBundle.ViewCalculoDepreciacionTitle_depreciacionacumulada}"/>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_cuentacompra}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.cuentacompra}" title="#{myBundle.ViewCalculoDepreciacionTitle_cuentacompra}"/>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_cuentadepreciacion}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.cuentadepreciacion}" title="#{myBundle.ViewCalculoDepreciacionTitle_cuentadepreciacion}"/>
+
+                        <h:outputText value="#{myBundle.ViewCalculoDepreciacionLabel_activofijo}"/>
+                        <h:outputText value="#{calculoDepreciacionController.selected.activofijo.descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('CalculoDepreciacionViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

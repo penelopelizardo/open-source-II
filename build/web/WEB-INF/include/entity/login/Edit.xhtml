@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="LoginEditDlg" widgetVar="LoginEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditLoginTitle}" closeOnEscape="true">
+
+            <h:form id="LoginEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{loginController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditLoginLabel_idLogIn}" for="idLogIn" />
+                        <h:outputText id="idLogIn" value="#{loginController.selected.idLogIn}" />
+
+                        <p:outputLabel value="#{myBundle.EditLoginLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{loginController.selected.nombre}" title="#{myBundle.EditLoginTitle_nombre}" required="true" requiredMessage="#{myBundle.EditLoginRequiredMessage_nombre}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditLoginLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{loginController.selected.apellidos}" title="#{myBundle.EditLoginTitle_apellidos}" required="true" requiredMessage="#{myBundle.EditLoginRequiredMessage_apellidos}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditLoginLabel_usuario}" for="usuario" />
+                        <p:inputText id="usuario" value="#{loginController.selected.usuario}" title="#{myBundle.EditLoginTitle_usuario}" required="true" requiredMessage="#{myBundle.EditLoginRequiredMessage_usuario}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditLoginLabel_correoelectronico}" for="correoelectronico" />
+                        <p:inputText id="correoelectronico" value="#{loginController.selected.correoelectronico}" title="#{myBundle.EditLoginTitle_correoelectronico}" required="true" requiredMessage="#{myBundle.EditLoginRequiredMessage_correoelectronico}" size="150" maxlength="150"/>
+
+                        <p:outputLabel value="#{myBundle.EditLoginLabel_contrasena}" for="contrasena" />
+                        <p:inputText id="contrasena" value="#{loginController.selected.contrasena}" title="#{myBundle.EditLoginTitle_contrasena}" required="true" requiredMessage="#{myBundle.EditLoginRequiredMessage_contrasena}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditLoginLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{loginController.selected.sexo}" title="#{myBundle.EditLoginTitle_sexo}" required="true" requiredMessage="#{myBundle.EditLoginRequiredMessage_sexo}"/>
+
+                        <p:outputLabel value="#{myBundle.EditLoginLabel_fechanacimiento}" for="fechanacimiento" />
+                        <p:calendar id="fechanacimiento" pattern="MM/dd/yyyy" value="#{loginController.selected.fechanacimiento}" title="#{myBundle.EditLoginTitle_fechanacimiento}" required="true" requiredMessage="#{myBundle.EditLoginRequiredMessage_fechanacimiento}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{loginController.save}" value="#{myBundle.Save}" update="display,:LoginListForm:datalist,:LoginListForm:LoginDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('LoginEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('LoginEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

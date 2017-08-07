@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="CalculoDepreciacionCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateCalculoDepreciacionTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:CalculoDepreciacionListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="CalculoDepreciacionCreateForm">
+
+                <h:panelGroup id="display" rendered="#{calculoDepreciacionController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_anoproceso}" for="anoproceso" />
+                            <p:inputText id="anoproceso" value="#{calculoDepreciacionController.selected.anoproceso}" title="#{myBundle.CreateCalculoDepreciacionTitle_anoproceso}" required="true" requiredMessage="#{myBundle.CreateCalculoDepreciacionRequiredMessage_anoproceso}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_mesproceso}" for="mesproceso" />
+                            <p:inputText id="mesproceso" value="#{calculoDepreciacionController.selected.mesproceso}" title="#{myBundle.CreateCalculoDepreciacionTitle_mesproceso}" required="true" requiredMessage="#{myBundle.CreateCalculoDepreciacionRequiredMessage_mesproceso}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_fechaproceso}" for="fechaproceso" />
+                            <p:calendar id="fechaproceso" pattern="MM/dd/yyyy" value="#{calculoDepreciacionController.selected.fechaproceso}" title="#{myBundle.CreateCalculoDepreciacionTitle_fechaproceso}" required="true" requiredMessage="#{myBundle.CreateCalculoDepreciacionRequiredMessage_fechaproceso}" showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_montodepreciado}" for="montodepreciado" />
+                            <p:inputText id="montodepreciado" value="#{calculoDepreciacionController.selected.montodepreciado}" title="#{myBundle.CreateCalculoDepreciacionTitle_montodepreciado}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_depreciacionacumulada}" for="depreciacionacumulada" />
+                            <p:inputText id="depreciacionacumulada" value="#{calculoDepreciacionController.selected.depreciacionacumulada}" title="#{myBundle.CreateCalculoDepreciacionTitle_depreciacionacumulada}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_cuentacompra}" for="cuentacompra" />
+                            <p:inputText id="cuentacompra" value="#{calculoDepreciacionController.selected.cuentacompra}" title="#{myBundle.CreateCalculoDepreciacionTitle_cuentacompra}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_cuentadepreciacion}" for="cuentadepreciacion" />
+                            <p:inputText id="cuentadepreciacion" value="#{calculoDepreciacionController.selected.cuentadepreciacion}" title="#{myBundle.CreateCalculoDepreciacionTitle_cuentadepreciacion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateCalculoDepreciacionLabel_activofijo}" for="activofijo" />
+                            <p:selectOneMenu id="activofijo" value="#{calculoDepreciacionController.selected.activofijo}" required="true" requiredMessage="#{myBundle.CreateCalculoDepreciacionRequiredMessage_activofijo}" converter="activosFijosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{activosFijosController.items}"
+                                               var="activofijoItem"
+                                               itemValue="#{activofijoItem}"
+                                               itemLabel="#{activofijoItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{calculoDepreciacionController.saveNew}" value="#{myBundle.Save}" update="display,:CalculoDepreciacionListPage:CalculoDepreciacionListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:CalculoDepreciacionListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

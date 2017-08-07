@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ActivosFijosCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateActivosFijosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ActivosFijosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ActivosFijosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{activosFijosController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateActivosFijosLabel_descripcion}" for="descripcion" />
+                            <p:inputText id="descripcion" value="#{activosFijosController.selected.descripcion}" title="#{myBundle.CreateActivosFijosTitle_descripcion}" required="true" requiredMessage="#{myBundle.CreateActivosFijosRequiredMessage_descripcion}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateActivosFijosLabel_fecharegistro}" for="fecharegistro" />
+                            <p:calendar id="fecharegistro" pattern="MM/dd/yyyy" value="#{activosFijosController.selected.fecharegistro}" title="#{myBundle.CreateActivosFijosTitle_fecharegistro}" required="true" requiredMessage="#{myBundle.CreateActivosFijosRequiredMessage_fecharegistro}" showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateActivosFijosLabel_valorcompra}" for="valorcompra" />
+                            <p:inputText id="valorcompra" value="#{activosFijosController.selected.valorcompra}" title="#{myBundle.CreateActivosFijosTitle_valorcompra}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateActivosFijosLabel_depreciacionacumulada}" for="depreciacionacumulada" />
+                            <p:inputText id="depreciacionacumulada" value="#{activosFijosController.selected.depreciacionacumulada}" title="#{myBundle.CreateActivosFijosTitle_depreciacionacumulada}" required="true" requiredMessage="#{myBundle.CreateActivosFijosRequiredMessage_depreciacionacumulada}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateActivosFijosLabel_departamento}" for="departamento" />
+                            <p:selectOneMenu id="departamento" value="#{activosFijosController.selected.departamento}" required="true" requiredMessage="#{myBundle.CreateActivosFijosRequiredMessage_departamento}" converter="departamentosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{departamentosController.items}"
+                                               var="departamentoItem"
+                                               itemValue="#{departamentoItem}"
+                                               itemLabel="#{departamentoItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateActivosFijosLabel_ubicacion}" for="ubicacion" />
+                            <p:selectOneMenu id="ubicacion" value="#{activosFijosController.selected.ubicacion}" required="true" requiredMessage="#{myBundle.CreateActivosFijosRequiredMessage_ubicacion}" converter="ubicacionesConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{ubicacionesController.items}"
+                                               var="ubicacionItem"
+                                               itemValue="#{ubicacionItem}"
+                                               itemLabel="#{ubicacionItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateActivosFijosLabel_tipoactivo}" for="tipoactivo" />
+                            <p:selectOneMenu id="tipoactivo" value="#{activosFijosController.selected.tipoactivo}" required="true" requiredMessage="#{myBundle.CreateActivosFijosRequiredMessage_tipoactivo}" converter="tiposActivosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{tiposActivosController.items}"
+                                               var="tipoactivoItem"
+                                               itemValue="#{tipoactivoItem}"
+                                               itemLabel="#{tipoactivoItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{activosFijosController.saveNew}" value="#{myBundle.Save}" update="display,:ActivosFijosListPage:ActivosFijosListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:ActivosFijosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

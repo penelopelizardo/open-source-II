@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LoginCreateDlg" widgetVar="LoginCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateLoginTitle}" closeOnEscape="true">
+
+            <h:form id="LoginCreateForm">
+
+                <h:panelGroup id="display" rendered="#{loginController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateLoginLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{loginController.selected.nombre}" title="#{myBundle.CreateLoginTitle_nombre}" required="true" requiredMessage="#{myBundle.CreateLoginRequiredMessage_nombre}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.CreateLoginLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{loginController.selected.apellidos}" title="#{myBundle.CreateLoginTitle_apellidos}" required="true" requiredMessage="#{myBundle.CreateLoginRequiredMessage_apellidos}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.CreateLoginLabel_usuario}" for="usuario" />
+                        <p:inputText id="usuario" value="#{loginController.selected.usuario}" title="#{myBundle.CreateLoginTitle_usuario}" required="true" requiredMessage="#{myBundle.CreateLoginRequiredMessage_usuario}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.CreateLoginLabel_correoelectronico}" for="correoelectronico" />
+                        <p:inputText id="correoelectronico" value="#{loginController.selected.correoelectronico}" title="#{myBundle.CreateLoginTitle_correoelectronico}" required="true" requiredMessage="#{myBundle.CreateLoginRequiredMessage_correoelectronico}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.CreateLoginLabel_contrasena}" for="contrasena" />
+                        <p:inputText id="contrasena" value="#{loginController.selected.contrasena}" title="#{myBundle.CreateLoginTitle_contrasena}" required="true" requiredMessage="#{myBundle.CreateLoginRequiredMessage_contrasena}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.CreateLoginLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{loginController.selected.sexo}" title="#{myBundle.CreateLoginTitle_sexo}" required="true" requiredMessage="#{myBundle.CreateLoginRequiredMessage_sexo}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateLoginLabel_fechanacimiento}" for="fechanacimiento" />
+                        <p:calendar id="fechanacimiento" pattern="MM/dd/yyyy" value="#{loginController.selected.fechanacimiento}" title="#{myBundle.CreateLoginTitle_fechanacimiento}" required="true" requiredMessage="#{myBundle.CreateLoginRequiredMessage_fechanacimiento}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{loginController.saveNew}" value="#{myBundle.Save}" update="display,:LoginListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('LoginCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('LoginCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

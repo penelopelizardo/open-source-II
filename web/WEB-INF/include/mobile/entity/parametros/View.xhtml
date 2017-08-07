@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ParametrosViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewParametrosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ParametrosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ParametrosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{parametrosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewParametrosLabel_idparametros}"/>
+                            <h:outputText value="#{parametrosController.selected.idparametros}" title="#{myBundle.ViewParametrosTitle_idparametros}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewParametrosLabel_anoproceso}"/>
+                            <h:outputText value="#{parametrosController.selected.anoproceso}" title="#{myBundle.ViewParametrosTitle_anoproceso}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewParametrosLabel_mesproceso}"/>
+                            <h:outputText value="#{parametrosController.selected.mesproceso}" title="#{myBundle.ViewParametrosTitle_mesproceso}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewParametrosLabel_depreciacioncalculada}"/>
+                            <h:outputText value="#{parametrosController.selected.depreciacioncalculada}" title="#{myBundle.ViewParametrosTitle_depreciacioncalculada}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewParametrosLabel_RNCempresa}"/>
+                            <h:outputText value="#{parametrosController.selected.RNCempresa}" title="#{myBundle.ViewParametrosTitle_RNCempresa}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewParametrosLabel_metododepreciacion}"/>
+                            <h:outputText value="#{parametrosController.selected.metododepreciacion}" title="#{myBundle.ViewParametrosTitle_metododepreciacion}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

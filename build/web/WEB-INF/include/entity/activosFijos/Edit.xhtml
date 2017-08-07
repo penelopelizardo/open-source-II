@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ActivosFijosEditDlg" widgetVar="ActivosFijosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditActivosFijosTitle}" closeOnEscape="true">
+
+            <h:form id="ActivosFijosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{activosFijosController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditActivosFijosLabel_idactivosfijos}" for="idactivosfijos" />
+                        <h:outputText id="idactivosfijos" value="#{activosFijosController.selected.idactivosfijos}" />
+
+                        <p:outputLabel value="#{myBundle.EditActivosFijosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{activosFijosController.selected.descripcion}" title="#{myBundle.EditActivosFijosTitle_descripcion}" required="true" requiredMessage="#{myBundle.EditActivosFijosRequiredMessage_descripcion}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditActivosFijosLabel_fecharegistro}" for="fecharegistro" />
+                        <p:calendar id="fecharegistro" pattern="MM/dd/yyyy" value="#{activosFijosController.selected.fecharegistro}" title="#{myBundle.EditActivosFijosTitle_fecharegistro}" required="true" requiredMessage="#{myBundle.EditActivosFijosRequiredMessage_fecharegistro}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.EditActivosFijosLabel_valorcompra}" for="valorcompra" />
+                        <p:inputText id="valorcompra" value="#{activosFijosController.selected.valorcompra}" title="#{myBundle.EditActivosFijosTitle_valorcompra}"/>
+
+                        <p:outputLabel value="#{myBundle.EditActivosFijosLabel_depreciacionacumulada}" for="depreciacionacumulada" />
+                        <p:inputText id="depreciacionacumulada" value="#{activosFijosController.selected.depreciacionacumulada}" title="#{myBundle.EditActivosFijosTitle_depreciacionacumulada}" required="true" requiredMessage="#{myBundle.EditActivosFijosRequiredMessage_depreciacionacumulada}"/>
+
+                        <p:outputLabel value="#{myBundle.EditActivosFijosLabel_departamento}" for="departamento" />
+                        <p:selectOneMenu id="departamento" value="#{activosFijosController.selected.departamento}" required="true" requiredMessage="#{myBundle.EditActivosFijosRequiredMessage_departamento}" converter="departamentosConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentosController.items}"
+                                           var="departamentoItem"
+                                           itemValue="#{departamentoItem}"
+                                           itemLabel="#{departamentoItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.EditActivosFijosLabel_ubicacion}" for="ubicacion" />
+                        <p:selectOneMenu id="ubicacion" value="#{activosFijosController.selected.ubicacion}" required="true" requiredMessage="#{myBundle.EditActivosFijosRequiredMessage_ubicacion}" converter="ubicacionesConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{ubicacionesController.items}"
+                                           var="ubicacionItem"
+                                           itemValue="#{ubicacionItem}"
+                                           itemLabel="#{ubicacionItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.EditActivosFijosLabel_tipoactivo}" for="tipoactivo" />
+                        <p:selectOneMenu id="tipoactivo" value="#{activosFijosController.selected.tipoactivo}" required="true" requiredMessage="#{myBundle.EditActivosFijosRequiredMessage_tipoactivo}" converter="tiposActivosConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tiposActivosController.items}"
+                                           var="tipoactivoItem"
+                                           itemValue="#{tipoactivoItem}"
+                                           itemLabel="#{tipoactivoItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{activosFijosController.save}" value="#{myBundle.Save}" update="display,:ActivosFijosListForm:datalist,:ActivosFijosListForm:ActivosFijosDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ActivosFijosEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('ActivosFijosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedoresViewDlg" widgetVar="ProveedoresViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewProveedoresTitle}" closeOnEscape="true">
+
+            <h:form id="ProveedoresViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{proveedoresController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewProveedoresLabel_idproveedores}"/>
+                        <h:outputText value="#{proveedoresController.selected.idproveedores}" title="#{myBundle.ViewProveedoresTitle_idproveedores}"/>
+
+                        <h:outputText value="#{myBundle.ViewProveedoresLabel_nombre}"/>
+                        <h:outputText value="#{proveedoresController.selected.nombre}" title="#{myBundle.ViewProveedoresTitle_nombre}"/>
+
+                        <h:outputText value="#{myBundle.ViewProveedoresLabel_cedulaoRNC}"/>
+                        <h:outputText value="#{proveedoresController.selected.cedulaoRNC}" title="#{myBundle.ViewProveedoresTitle_cedulaoRNC}"/>
+
+                        <h:outputText value="#{myBundle.ViewProveedoresLabel_tipopersona}"/>
+                        <h:outputText value="#{proveedoresController.selected.tipopersona}" title="#{myBundle.ViewProveedoresTitle_tipopersona}"/>
+
+                        <h:outputText value="#{myBundle.ViewProveedoresLabel_fecharegistro}"/>
+                        <h:outputText value="#{proveedoresController.selected.fecharegistro}" title="#{myBundle.ViewProveedoresTitle_fecharegistro}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewProveedoresLabel_estado}"/>
+                        <p:selectBooleanCheckbox id="estado" value="#{proveedoresController.selected.estado}" title="#{myBundle.EditProveedoresTitle_estado}" required="true" requiredMessage="#{myBundle.EditProveedoresRequiredMessage_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('ProveedoresViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:composition>
+        <p:dialog id="EmpleadosCreateDlg" widgetVar="EmpleadosCreateDialog" modal="true" resizable="true" appendTo="@(body)" header="#{myBundle.CreateEmpleadosTitle}" closeOnEscape="true">
+
+            <h:form id="EmpleadosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{empleadosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{empleadosController.selected.nombre}" title="#{myBundle.CreateEmpleadosTitle_nombre}" required="true" requiredMessage="#{myBundle.CreateEmpleadosRequiredMessage_nombre}" size="30" maxlength="30"/>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_cedula}" for="cedula" id="jghgh"/>
+                        <p:inputText id="cedula" value="#{empleadosController.selected.cedula}" title="#{myBundle.CreateEmpleadosTitle_cedula}" required="true" requiredMessage="#{myBundle.CreateEmpleadosRequiredMessage_cedula}" size="13" maxlength="13"/>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_fechaingreso}" for="fechaingreso" />
+                        <p:calendar id="fechaingreso" pattern="MM/dd/yyyy" value="#{empleadosController.selected.fechaingreso}" title="#{myBundle.CreateEmpleadosTitle_fechaingreso}" required="true" requiredMessage="#{myBundle.CreateEmpleadosRequiredMessage_fechaingreso}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{empleadosController.selected.estado}" required="true" requiredMessage="#{myBundle.CreateEmpleadosRequiredMessage_estado}"/>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_departamento}" for="departamento" />
+                        <p:selectOneMenu id="departamento" value="#{empleadosController.selected.departamento}" required="true" requiredMessage="#{myBundle.CreateEmpleadosRequiredMessage_departamento}" converter="departamentosConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentosController.items}"
+                                           var="departamentoItem"
+                                           itemValue="#{departamentoItem}"
+                                           itemLabel="#{departamentoItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{empleadosController.saveNew}" value="#{myBundle.Save}" update="display,:EmpleadosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EmpleadosCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('EmpleadosCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+    
+</html>

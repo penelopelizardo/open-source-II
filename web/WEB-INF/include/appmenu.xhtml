@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">
+            <p:menubar>
+                <p:menuitem value="#{myBundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                <p:submenu label="Mantenimiento">
+                    <p:menuitem value="#{myBundle.ActivosFijosHeading}" outcome="/app/activosFijos/index" />
+                    <p:menuitem value="#{myBundle.DepartamentosHeading}" outcome="/app/departamentos/index" />
+                    <p:menuitem value="#{myBundle.EmpleadosHeading}" outcome="/app/empleados/index" />
+                    <p:menuitem value="#{myBundle.ParametrosHeading}" outcome="/app/parametros/index" />
+                    <p:menuitem value="#{myBundle.ProveedoresHeading}" outcome="/app/proveedores/index" />
+                    <p:menuitem value="#{myBundle.TiposActivosHeading}" outcome="/app/tiposActivos/index" />
+                    <p:menuitem value="#{myBundle.TiposPagosHeading}" outcome="/app/tiposPagos/index" />
+                    <p:menuitem value="#{myBundle.UbicacionesHeading}" outcome="/app/ubicaciones/index" />
+                </p:submenu>
+            <p:menuitem value="#{myBundle.CalculoDepreciacionHeading}" outcome="/app/calculoDepreciacion/index" />
+            <p:menuitem value="#{myBundle.LoginHeading}" outcome="/app/login/index" icon="ui-icon-person"/>
+            <p:menuitem value="Regístrate" outcome="/WEB-INF/include/entity/login/Create.xhtml" icon="ui-icon-key"/>
+            
+            </p:menubar>
+        </h:form>
+    </ui:composition>
+
+</html>

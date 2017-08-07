@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="UbicacionesViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewUbicacionesTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:UbicacionesListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="UbicacionesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{ubicacionesController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewUbicacionesLabel_idubicaciones}"/>
+                            <h:outputText value="#{ubicacionesController.selected.idubicaciones}" title="#{myBundle.ViewUbicacionesTitle_idubicaciones}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewUbicacionesLabel_descripcion}"/>
+                            <h:outputText value="#{ubicacionesController.selected.descripcion}" title="#{myBundle.ViewUbicacionesTitle_descripcion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewUbicacionesLabel_direccion}"/>
+                            <h:outputText value="#{ubicacionesController.selected.direccion}" title="#{myBundle.ViewUbicacionesTitle_direccion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewUbicacionesLabel_edificio}"/>
+                            <h:outputText value="#{ubicacionesController.selected.edificio}" title="#{myBundle.ViewUbicacionesTitle_edificio}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewUbicacionesLabel_estado}"/>
+                            <h:selectBooleanCheckbox id="estado" value="#{ubicacionesController.selected.estado}" title="#{myBundle.EditUbicacionesTitle_estado}" required="true" requiredMessage="#{myBundle.EditUbicacionesRequiredMessage_estado}" disabled="true"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

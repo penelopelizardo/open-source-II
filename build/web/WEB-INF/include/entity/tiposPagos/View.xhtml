@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TiposPagosViewDlg" widgetVar="TiposPagosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewTiposPagosTitle}" closeOnEscape="true">
+
+            <h:form id="TiposPagosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{tiposPagosController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewTiposPagosLabel_idtipospagos}"/>
+                        <h:outputText value="#{tiposPagosController.selected.idtipospagos}" title="#{myBundle.ViewTiposPagosTitle_idtipospagos}"/>
+
+                        <h:outputText value="#{myBundle.ViewTiposPagosLabel_descripcion}"/>
+                        <h:outputText value="#{tiposPagosController.selected.descripcion}" title="#{myBundle.ViewTiposPagosTitle_descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewTiposPagosLabel_estado}"/>
+                        <p:selectBooleanCheckbox id="estado" value="#{tiposPagosController.selected.estado}" title="#{myBundle.EditTiposPagosTitle_estado}" required="true" requiredMessage="#{myBundle.EditTiposPagosRequiredMessage_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('TiposPagosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

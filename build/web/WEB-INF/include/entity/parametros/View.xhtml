@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParametrosViewDlg" widgetVar="ParametrosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewParametrosTitle}" closeOnEscape="true">
+
+            <h:form id="ParametrosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{parametrosController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewParametrosLabel_idparametros}"/>
+                        <h:outputText value="#{parametrosController.selected.idparametros}" title="#{myBundle.ViewParametrosTitle_idparametros}"/>
+
+                        <h:outputText value="#{myBundle.ViewParametrosLabel_anoproceso}"/>
+                        <h:outputText value="#{parametrosController.selected.anoproceso}" title="#{myBundle.ViewParametrosTitle_anoproceso}"/>
+
+                        <h:outputText value="#{myBundle.ViewParametrosLabel_mesproceso}"/>
+                        <h:outputText value="#{parametrosController.selected.mesproceso}" title="#{myBundle.ViewParametrosTitle_mesproceso}"/>
+
+                        <h:outputText value="#{myBundle.ViewParametrosLabel_depreciacioncalculada}"/>
+                        <h:outputText value="#{parametrosController.selected.depreciacioncalculada}" title="#{myBundle.ViewParametrosTitle_depreciacioncalculada}"/>
+
+                        <h:outputText value="#{myBundle.ViewParametrosLabel_RNCempresa}"/>
+                        <h:outputText value="#{parametrosController.selected.RNCempresa}" title="#{myBundle.ViewParametrosTitle_RNCempresa}"/>
+
+                        <h:outputText value="#{myBundle.ViewParametrosLabel_metododepreciacion}"/>
+                        <h:outputText value="#{parametrosController.selected.metododepreciacion}" title="#{myBundle.ViewParametrosTitle_metododepreciacion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('ParametrosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

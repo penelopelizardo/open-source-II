@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ParametrosListForm">
+
+        <p:panel header="#{myBundle.ListParametrosTitle}">
+            <p:contextMenu id="ParametrosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('ParametrosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('ParametrosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('ParametrosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('ParametrosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{parametrosController.items}"
+                         lazy="false"
+                         rowKey="#{item.idparametros}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{parametrosController.selected}"
+                         filteredValue="#{parametrosController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{parametrosController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.idparametros}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ParametrosDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ParametrosDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ParametrosListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idparametros}" filterBy="#{item.idparametros}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListParametrosTitle_idparametros}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idparametros}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.anoproceso}" filterBy="#{item.anoproceso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListParametrosTitle_anoproceso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.anoproceso}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.mesproceso}" filterBy="#{item.mesproceso}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListParametrosTitle_mesproceso}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.mesproceso}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.depreciacioncalculada}" filterBy="#{item.depreciacioncalculada}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListParametrosTitle_depreciacioncalculada}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.depreciacioncalculada}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.RNCempresa}" filterBy="#{item.RNCempresa}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListParametrosTitle_RNCempresa}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.RNCempresa}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.metododepreciacion}" filterBy="#{item.metododepreciacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListParametrosTitle_metododepreciacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.metododepreciacion}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{parametrosController.prepareCreate}" update=":ParametrosCreateForm" oncomplete="PF('ParametrosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":ParametrosViewForm" oncomplete="PF('ParametrosViewDialog').show()" disabled="#{empty parametrosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":ParametrosEditForm" oncomplete="PF('ParametrosEditDialog').show()" disabled="#{empty parametrosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{parametrosController.delete}" update=":growl,datalist" disabled="#{empty parametrosController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

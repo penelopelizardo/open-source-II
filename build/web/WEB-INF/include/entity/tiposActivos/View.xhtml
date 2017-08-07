@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TiposActivosViewDlg" widgetVar="TiposActivosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewTiposActivosTitle}" closeOnEscape="true">
+
+            <h:form id="TiposActivosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{tiposActivosController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewTiposActivosLabel_idtiposactivos}"/>
+                        <h:outputText value="#{tiposActivosController.selected.idtiposactivos}" title="#{myBundle.ViewTiposActivosTitle_idtiposactivos}"/>
+
+                        <h:outputText value="#{myBundle.ViewTiposActivosLabel_descripcion}"/>
+                        <h:outputText value="#{tiposActivosController.selected.descripcion}" title="#{myBundle.ViewTiposActivosTitle_descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewTiposActivosLabel_cuentacontablecompra}"/>
+                        <h:outputText value="#{tiposActivosController.selected.cuentacontablecompra}" title="#{myBundle.ViewTiposActivosTitle_cuentacontablecompra}"/>
+
+                        <h:outputText value="#{myBundle.ViewTiposActivosLabel_cuentacontabledepreciacion}"/>
+                        <h:outputText value="#{tiposActivosController.selected.cuentacontabledepreciacion}" title="#{myBundle.ViewTiposActivosTitle_cuentacontabledepreciacion}"/>
+
+                        <h:outputText value="#{myBundle.ViewTiposActivosLabel_estado}"/>
+                        <p:selectBooleanCheckbox id="estado" value="#{tiposActivosController.selected.estado}" title="#{myBundle.EditTiposActivosTitle_estado}" required="true" requiredMessage="#{myBundle.EditTiposActivosRequiredMessage_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('TiposActivosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

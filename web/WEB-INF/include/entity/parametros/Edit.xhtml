@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ParametrosEditDlg" widgetVar="ParametrosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditParametrosTitle}" closeOnEscape="true">
+
+            <h:form id="ParametrosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{parametrosController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditParametrosLabel_idparametros}" for="idparametros" />
+                        <h:outputText id="idparametros" value="#{parametrosController.selected.idparametros}" />
+
+                        <p:outputLabel value="#{myBundle.EditParametrosLabel_anoproceso}" for="anoproceso" />
+                        <p:inputText id="anoproceso" value="#{parametrosController.selected.anoproceso}" title="#{myBundle.EditParametrosTitle_anoproceso}" required="true" requiredMessage="#{myBundle.EditParametrosRequiredMessage_anoproceso}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditParametrosLabel_mesproceso}" for="mesproceso" />
+                        <p:inputText id="mesproceso" value="#{parametrosController.selected.mesproceso}" title="#{myBundle.EditParametrosTitle_mesproceso}" required="true" requiredMessage="#{myBundle.EditParametrosRequiredMessage_mesproceso}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditParametrosLabel_depreciacioncalculada}" for="depreciacioncalculada" />
+                        <p:inputText id="depreciacioncalculada" value="#{parametrosController.selected.depreciacioncalculada}" title="#{myBundle.EditParametrosTitle_depreciacioncalculada}" required="true" requiredMessage="#{myBundle.EditParametrosRequiredMessage_depreciacioncalculada}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{myBundle.EditParametrosLabel_RNCempresa}" for="RNCempresa" />
+                        <p:inputText id="RNCempresa" value="#{parametrosController.selected.RNCempresa}" title="#{myBundle.EditParametrosTitle_RNCempresa}" required="true" requiredMessage="#{myBundle.EditParametrosRequiredMessage_RNCempresa}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{myBundle.EditParametrosLabel_metododepreciacion}" for="metododepreciacion" />
+                        <p:inputText id="metododepreciacion" value="#{parametrosController.selected.metododepreciacion}" title="#{myBundle.EditParametrosTitle_metododepreciacion}" required="true" requiredMessage="#{myBundle.EditParametrosRequiredMessage_metododepreciacion}" size="20" maxlength="20"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{parametrosController.save}" value="#{myBundle.Save}" update="display,:ParametrosListForm:datalist,:ParametrosListForm:ParametrosDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ParametrosEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('ParametrosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedoresCreateDlg" widgetVar="ProveedoresCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateProveedoresTitle}" closeOnEscape="true">
+
+            <h:form id="ProveedoresCreateForm">
+
+                <h:panelGroup id="display" rendered="#{proveedoresController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{proveedoresController.selected.nombre}" title="#{myBundle.CreateProveedoresTitle_nombre}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_nombre}" size="30" maxlength="30"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_cedulaoRNC}" for="cedulaoRNC" />
+                        <p:inputText id="cedulaoRNC" value="#{proveedoresController.selected.cedulaoRNC}" title="#{myBundle.CreateProveedoresTitle_cedulaoRNC}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_cedulaoRNC}" size="13" maxlength="13"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_tipopersona}" for="tipopersona" />
+                        <p:inputText id="tipopersona" value="#{proveedoresController.selected.tipopersona}" title="#{myBundle.CreateProveedoresTitle_tipopersona}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_tipopersona}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_fecharegistro}" for="fecharegistro" />
+                        <p:calendar id="fecharegistro" pattern="MM/dd/yyyy HH:mm:ss" value="#{proveedoresController.selected.fecharegistro}" title="#{myBundle.CreateProveedoresTitle_fecharegistro}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_fecharegistro}" showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{proveedoresController.selected.estado}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proveedoresController.saveNew}" value="#{myBundle.Save}" update="display,:ProveedoresListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProveedoresCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('ProveedoresCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

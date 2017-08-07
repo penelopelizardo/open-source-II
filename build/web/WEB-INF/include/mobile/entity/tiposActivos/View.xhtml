@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TiposActivosViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewTiposActivosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TiposActivosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TiposActivosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{tiposActivosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewTiposActivosLabel_idtiposactivos}"/>
+                            <h:outputText value="#{tiposActivosController.selected.idtiposactivos}" title="#{myBundle.ViewTiposActivosTitle_idtiposactivos}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewTiposActivosLabel_descripcion}"/>
+                            <h:outputText value="#{tiposActivosController.selected.descripcion}" title="#{myBundle.ViewTiposActivosTitle_descripcion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewTiposActivosLabel_cuentacontablecompra}"/>
+                            <h:outputText value="#{tiposActivosController.selected.cuentacontablecompra}" title="#{myBundle.ViewTiposActivosTitle_cuentacontablecompra}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewTiposActivosLabel_cuentacontabledepreciacion}"/>
+                            <h:outputText value="#{tiposActivosController.selected.cuentacontabledepreciacion}" title="#{myBundle.ViewTiposActivosTitle_cuentacontabledepreciacion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewTiposActivosLabel_estado}"/>
+                            <h:selectBooleanCheckbox id="estado" value="#{tiposActivosController.selected.estado}" title="#{myBundle.EditTiposActivosTitle_estado}" required="true" requiredMessage="#{myBundle.EditTiposActivosRequiredMessage_estado}" disabled="true"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

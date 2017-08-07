@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LoginViewDlg" widgetVar="LoginViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewLoginTitle}" closeOnEscape="true">
+
+            <h:form id="LoginViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{loginController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_idLogIn}"/>
+                        <h:outputText value="#{loginController.selected.idLogIn}" title="#{myBundle.ViewLoginTitle_idLogIn}"/>
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_nombre}"/>
+                        <h:outputText value="#{loginController.selected.nombre}" title="#{myBundle.ViewLoginTitle_nombre}"/>
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_apellidos}"/>
+                        <h:outputText value="#{loginController.selected.apellidos}" title="#{myBundle.ViewLoginTitle_apellidos}"/>
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_usuario}"/>
+                        <h:outputText value="#{loginController.selected.usuario}" title="#{myBundle.ViewLoginTitle_usuario}"/>
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_correoelectronico}"/>
+                        <h:outputText value="#{loginController.selected.correoelectronico}" title="#{myBundle.ViewLoginTitle_correoelectronico}"/>
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_contrasena}"/>
+                        <h:outputText value="#{loginController.selected.contrasena}" title="#{myBundle.ViewLoginTitle_contrasena}"/>
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_sexo}"/>
+                        <h:outputText value="#{loginController.selected.sexo}" title="#{myBundle.ViewLoginTitle_sexo}"/>
+
+                        <h:outputText value="#{myBundle.ViewLoginLabel_fechanacimiento}"/>
+                        <h:outputText value="#{loginController.selected.fechanacimiento}" title="#{myBundle.ViewLoginTitle_fechanacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('LoginViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

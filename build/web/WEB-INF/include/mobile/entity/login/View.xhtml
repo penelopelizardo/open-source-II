@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="LoginViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewLoginTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:LoginListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="LoginViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{loginController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_idLogIn}"/>
+                            <h:outputText value="#{loginController.selected.idLogIn}" title="#{myBundle.ViewLoginTitle_idLogIn}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_nombre}"/>
+                            <h:outputText value="#{loginController.selected.nombre}" title="#{myBundle.ViewLoginTitle_nombre}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_apellidos}"/>
+                            <h:outputText value="#{loginController.selected.apellidos}" title="#{myBundle.ViewLoginTitle_apellidos}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_usuario}"/>
+                            <h:outputText value="#{loginController.selected.usuario}" title="#{myBundle.ViewLoginTitle_usuario}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_correoelectronico}"/>
+                            <h:outputText value="#{loginController.selected.correoelectronico}" title="#{myBundle.ViewLoginTitle_correoelectronico}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_contrasena}"/>
+                            <h:outputText value="#{loginController.selected.contrasena}" title="#{myBundle.ViewLoginTitle_contrasena}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_sexo}"/>
+                            <h:outputText value="#{loginController.selected.sexo}" title="#{myBundle.ViewLoginTitle_sexo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewLoginLabel_fechanacimiento}"/>
+                            <h:outputText value="#{loginController.selected.fechanacimiento}" title="#{myBundle.ViewLoginTitle_fechanacimiento}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

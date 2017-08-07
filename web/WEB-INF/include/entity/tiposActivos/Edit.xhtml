@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TiposActivosEditDlg" widgetVar="TiposActivosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditTiposActivosTitle}" closeOnEscape="true">
+
+            <h:form id="TiposActivosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{tiposActivosController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditTiposActivosLabel_idtiposactivos}" for="idtiposactivos" />
+                        <h:outputText id="idtiposactivos" value="#{tiposActivosController.selected.idtiposactivos}" />
+
+                        <p:outputLabel value="#{myBundle.EditTiposActivosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tiposActivosController.selected.descripcion}" title="#{myBundle.EditTiposActivosTitle_descripcion}" required="true" requiredMessage="#{myBundle.EditTiposActivosRequiredMessage_descripcion}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{myBundle.EditTiposActivosLabel_cuentacontablecompra}" for="cuentacontablecompra" />
+                        <p:inputText id="cuentacontablecompra" value="#{tiposActivosController.selected.cuentacontablecompra}" title="#{myBundle.EditTiposActivosTitle_cuentacontablecompra}" required="true" requiredMessage="#{myBundle.EditTiposActivosRequiredMessage_cuentacontablecompra}"/>
+
+                        <p:outputLabel value="#{myBundle.EditTiposActivosLabel_cuentacontabledepreciacion}" for="cuentacontabledepreciacion" />
+                        <p:inputText id="cuentacontabledepreciacion" value="#{tiposActivosController.selected.cuentacontabledepreciacion}" title="#{myBundle.EditTiposActivosTitle_cuentacontabledepreciacion}" required="true" requiredMessage="#{myBundle.EditTiposActivosRequiredMessage_cuentacontabledepreciacion}"/>
+
+                        <p:outputLabel value="#{myBundle.EditTiposActivosLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{tiposActivosController.selected.estado}" required="true" requiredMessage="#{myBundle.EditTiposActivosRequiredMessage_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tiposActivosController.save}" value="#{myBundle.Save}" update="display,:TiposActivosListForm:datalist,:TiposActivosListForm:TiposActivosDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TiposActivosEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('TiposActivosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

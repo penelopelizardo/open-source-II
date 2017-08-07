@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ActivosFijosListForm">
+
+        <p:panel header="#{myBundle.ListActivosFijosTitle}">
+            <p:contextMenu id="ActivosFijosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('ActivosFijosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('ActivosFijosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('ActivosFijosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('ActivosFijosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.ActivosFijosMenuItem_departamento}" icon="ui-icon-search"  actionListener="#{activosFijosController.prepareDepartamento}" update=":DepartamentosViewForm" oncomplete="PF('DepartamentosViewDialog').show()" disabled="#{empty activosFijosController.selected.departamento}"/>  
+                <p:menuitem value="#{myBundle.ActivosFijosMenuItem_ubicacion}" icon="ui-icon-search"  actionListener="#{activosFijosController.prepareUbicacion}" update=":UbicacionesViewForm" oncomplete="PF('UbicacionesViewDialog').show()" disabled="#{empty activosFijosController.selected.ubicacion}"/>  
+                <p:menuitem value="#{myBundle.ActivosFijosMenuItem_tipoactivo}" icon="ui-icon-search"  actionListener="#{activosFijosController.prepareTipoactivo}" update=":TiposActivosViewForm" oncomplete="PF('TiposActivosViewDialog').show()" disabled="#{empty activosFijosController.selected.tipoactivo}"/>  
+                <p:menuitem value="#{myBundle.ActivosFijosMenuItem_calculoDepreciacionCollection}" icon="ui-icon-search"  action="#{activosFijosController.navigateCalculoDepreciacionCollection}" disabled="#{activosFijosController.isCalculoDepreciacionCollectionEmpty}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{activosFijosController.items}"
+                         lazy="false"
+                         rowKey="#{item.idactivosfijos}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{activosFijosController.selected}"
+                         filteredValue="#{activosFijosController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{activosFijosController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.idactivosfijos}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ActivosFijosDataTableContextMenu" listener="#{activosFijosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ActivosFijosDataTableContextMenu" listener="#{activosFijosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{activosFijosController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ActivosFijosListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idactivosfijos}" filterBy="#{item.idactivosfijos}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListActivosFijosTitle_idactivosfijos}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idactivosfijos}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descripcion}" filterBy="#{item.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListActivosFijosTitle_descripcion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descripcion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fecharegistro}" filterBy="#{item.fecharegistro}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListActivosFijosTitle_fecharegistro}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fecharegistro}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.valorcompra}" filterBy="#{item.valorcompra}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListActivosFijosTitle_valorcompra}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.valorcompra}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.depreciacionacumulada}" filterBy="#{item.depreciacionacumulada}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListActivosFijosTitle_depreciacionacumulada}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.depreciacionacumulada}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.departamento.descripcion}" filterBy="#{item.departamento.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListActivosFijosTitle_departamento}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.departamento.descripcion}"/>
+                </p:column>
+
+                <ui:remove>
+                    <p:column sortBy="#{item.ubicacion.descripcion}" filterBy="#{item.ubicacion.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListActivosFijosTitle_ubicacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ubicacion.descripcion}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.tipoactivo.descripcion}" filterBy="#{item.tipoactivo.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListActivosFijosTitle_tipoactivo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoactivo.descripcion}"/>
+                    </p:column>
+                </ui:remove>
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{activosFijosController.prepareCreate}" update=":ActivosFijosCreateForm" oncomplete="PF('ActivosFijosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":ActivosFijosViewForm" oncomplete="PF('ActivosFijosViewDialog').show()" disabled="#{empty activosFijosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":ActivosFijosEditForm" oncomplete="PF('ActivosFijosEditDialog').show()" disabled="#{empty activosFijosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{activosFijosController.delete}" update=":growl,datalist" disabled="#{empty activosFijosController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

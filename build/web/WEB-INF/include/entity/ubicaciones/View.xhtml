@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UbicacionesViewDlg" widgetVar="UbicacionesViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewUbicacionesTitle}" closeOnEscape="true">
+
+            <h:form id="UbicacionesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{ubicacionesController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewUbicacionesLabel_idubicaciones}"/>
+                        <h:outputText value="#{ubicacionesController.selected.idubicaciones}" title="#{myBundle.ViewUbicacionesTitle_idubicaciones}"/>
+
+                        <h:outputText value="#{myBundle.ViewUbicacionesLabel_descripcion}"/>
+                        <h:outputText value="#{ubicacionesController.selected.descripcion}" title="#{myBundle.ViewUbicacionesTitle_descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewUbicacionesLabel_direccion}"/>
+                        <h:outputText value="#{ubicacionesController.selected.direccion}" title="#{myBundle.ViewUbicacionesTitle_direccion}"/>
+
+                        <h:outputText value="#{myBundle.ViewUbicacionesLabel_edificio}"/>
+                        <h:outputText value="#{ubicacionesController.selected.edificio}" title="#{myBundle.ViewUbicacionesTitle_edificio}"/>
+
+                        <h:outputText value="#{myBundle.ViewUbicacionesLabel_estado}"/>
+                        <p:selectBooleanCheckbox id="estado" value="#{ubicacionesController.selected.estado}" title="#{myBundle.EditUbicacionesTitle_estado}" required="true" requiredMessage="#{myBundle.EditUbicacionesRequiredMessage_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('UbicacionesViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

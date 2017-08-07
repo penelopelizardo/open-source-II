@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ProveedoresCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateProveedoresTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ProveedoresListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ProveedoresCreateForm">
+
+                <h:panelGroup id="display" rendered="#{proveedoresController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateProveedoresLabel_nombre}" for="nombre" />
+                            <p:inputText id="nombre" value="#{proveedoresController.selected.nombre}" title="#{myBundle.CreateProveedoresTitle_nombre}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_nombre}" size="30" maxlength="30"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateProveedoresLabel_cedulaoRNC}" for="cedulaoRNC" />
+                            <p:inputText id="cedulaoRNC" value="#{proveedoresController.selected.cedulaoRNC}" title="#{myBundle.CreateProveedoresTitle_cedulaoRNC}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_cedulaoRNC}" size="13" maxlength="13"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateProveedoresLabel_tipopersona}" for="tipopersona" />
+                            <p:inputText id="tipopersona" value="#{proveedoresController.selected.tipopersona}" title="#{myBundle.CreateProveedoresTitle_tipopersona}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_tipopersona}" size="20" maxlength="20"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateProveedoresLabel_fecharegistro}" for="fecharegistro" />
+                            <p:calendar id="fecharegistro" pattern="MM/dd/yyyy HH:mm:ss" value="#{proveedoresController.selected.fecharegistro}" title="#{myBundle.CreateProveedoresTitle_fecharegistro}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_fecharegistro}" showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateProveedoresLabel_estado}" for="estado" />
+                            <p:selectBooleanCheckbox id="estado" value="#{proveedoresController.selected.estado}" required="true" requiredMessage="#{myBundle.CreateProveedoresRequiredMessage_estado}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{proveedoresController.saveNew}" value="#{myBundle.Save}" update="display,:ProveedoresListPage:ProveedoresListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:ProveedoresListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>
